@@ -50,6 +50,6 @@ export const contactLinks: ContactLink[] = [
   {
     label: 'PGP Key',
     href: '/downloads/pgp-public.asc',
-    description: 'Fingerprint: XXXX XXXX XXXX XXXX',
+    description: '2037 0BFF 53C7 0CBF 354F  A222 A2A6 0263 EB2F BCB9',
   },
 ];

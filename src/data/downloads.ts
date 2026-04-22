@@ -12,4 +12,10 @@ export const downloads: Download[] = [
   //  description: 'My curriculum vitae.',
   //  size: '—',
   //},
+  {
+    name: 'PGP Public Key',
+    filename: 'pgp-public.asc',
+    description: 'For contacting me safely via Email.',
+    size: '3.1K',
+  },
 ];
