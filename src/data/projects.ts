@@ -4,17 +4,16 @@ export interface Project {
   url?: string;
   sourceUrl?: string;
   tags: string[];
-  status: 'active' | 'archived' | 'wip';
+  archived?: boolean;
 }
 
 export const projects: Project[] = [
   {
     name: 'pr0dl',
-    description: ' A command-line downloader for pr0gramm.com. Fetches media URLs from the API and downloads them in parallel with resume support. ',
-    //url: 'https://github.com/ryodari/pr0dl',
+    description: 'A command-line downloader for pr0gramm.com. Fetches media URLs from the API and downloads them in parallel with resume support.',
     sourceUrl: 'https://github.com/ryodari/pr0dl',
     tags: ['Rust'],
-    status: 'active',
+    archived: false,
   },
   {
     name: 'beparano.id',
@@ -22,6 +21,6 @@ export const projects: Project[] = [
     url: 'https://beparano.id',
     sourceUrl: 'https://github.com/ryodari/ryodari.github.io',
     tags: ['Astro', 'Tailwind', 'TypeScript'],
-    status: 'wip',
+    archived: false,
   },
 ];

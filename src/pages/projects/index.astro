@@ -1,12 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { projects } from '../../data/projects';
-
-const statusLabel: Record<typeof projects[number]['status'], string> = {
-  active: 'Active',
-  archived: 'Archived',
-  wip: 'In progress',
-};
 ---
 
 <Base title="Projects" description="A selection of things I've built.">
@@ -20,10 +14,12 @@ const statusLabel: Record<typeof projects[number]['status'], string> = {
       {projects.map(project => (
         <li class="border-b border-border pb-8 last:border-0 last:pb-0">
           <div class="flex items-start justify-between gap-4 mb-2">
-            <h2 class="font-medium">{project.name}</h2>
-            <span class="text-xs font-mono bg-surface text-ink-secondary px-1.5 py-0.5 rounded shrink-0">
-              {statusLabel[project.status]}
-            </span>
+            <h2 class:list={['font-medium', project.archived && 'text-ink-secondary']}>{project.name}</h2>
+            {project.archived && (
+              <span class="text-xs font-mono bg-surface text-ink-tertiary px-1.5 py-0.5 rounded shrink-0">
+                Archived
+              </span>
+            )}
           </div>
           <p class="text-sm text-ink-secondary leading-relaxed mb-3">{project.description}</p>
           <div class="flex gap-4 flex-wrap">
