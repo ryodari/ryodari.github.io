@@ -52,6 +52,7 @@
   ::selection {
     background-color: var(--color-surface-strong);
   }
+
 }
 
 /* ── Prose (Blog content) ─────────────────────────────────── */
@@ -97,5 +98,19 @@
   .prose pre {
     border: 1px solid var(--color-border);
     border-radius: 6px;
+  }
+
+  /* Heading anchor links */
+  .heading-anchor {
+    text-decoration: none !important;
+    opacity: 0;
+    color: var(--color-ink-tertiary);
+    font-weight: 400;
+    margin-left: 0.1em;
+    transition: opacity 150ms ease;
+  }
+
+  :is(h1, h2, h3, h4, h5, h6):hover .heading-anchor {
+    opacity: 1;
   }
 }

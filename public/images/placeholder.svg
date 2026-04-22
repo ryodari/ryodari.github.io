@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
-  <rect width="800" height="450" fill="#F3F2EE"/>
-  <rect x="1" y="1" width="798" height="448" fill="none" stroke="#E4E3DE" stroke-width="1"/>
-  <text x="400" y="218" font-family="monospace" font-size="14" fill="#A8A8A2" text-anchor="middle">800 × 450</text>
-  <text x="400" y="240" font-family="monospace" font-size="14" fill="#A8A8A2" text-anchor="middle">placeholder.svg</text>
-</svg>
