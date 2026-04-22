@@ -1,0 +1,96 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+
+const siteName = 'beparano.id';
+const siteDescription = 'Personal website of Ryodari — Berlin.';
+const pageTitle = title ? `${title} — ${siteName}` : siteName;
+const pageDescription = description ?? siteDescription;
+
+const navItems = [
+  { label: 'Blog',      href: '/blog' },
+  { label: 'Projects',  href: '/projects' },
+  { label: 'Contact',   href: '/contact' },
+  { label: 'Downloads', href: '/downloads' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={`https://beparano.id${currentPath}`} />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+  </head>
+
+  <body class="bg-paper text-ink flex flex-col min-h-screen">
+
+    <header class="border-b border-border">
+      <nav class="max-w-2xl mx-auto px-6 py-4 flex items-center justify-between gap-6">
+        <a
+          href="/"
+          class="font-mono text-sm font-medium tracking-tight no-underline hover:text-ink-secondary transition-colors"
+        >
+          beparano.id
+        </a>
+
+        <div class="flex items-center gap-5 text-sm">
+          {navItems.map(({ label, href }) => {
+            const isActive = currentPath === href || (href !== '/' && currentPath.startsWith(href));
+            return (
+              <a
+                href={href}
+                class:list={[
+                  'no-underline transition-colors',
+                  isActive ? 'text-ink font-medium' : 'text-ink-secondary hover:text-ink',
+                ]}
+              >
+                {label}
+              </a>
+            );
+          })}
+        </div>
+      </nav>
+    </header>
+
+    <main class="flex-1 max-w-2xl mx-auto w-full px-6 py-12">
+      <slot />
+    </main>
+
+    <footer class="border-t border-border mt-auto">
+      <div class="max-w-2xl mx-auto px-6 py-6 flex items-center justify-between text-xs text-ink-tertiary">
+        <span>© {new Date().getFullYear()} Ryodari</span>
+        <div class="flex gap-4">
+          <a
+            href="https://github.com/ryodari/beparano.id"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-ink transition-colors no-underline"
+          >
+            Source on GitHub
+          </a>
+          <span>Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Astro</a></span>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>

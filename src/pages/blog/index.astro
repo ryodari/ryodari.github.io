@@ -1,0 +1,43 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const formattedDate = (date: Date) =>
+  new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' }).format(date);
+---
+
+<Base title="Blog" description="Thoughts on tech, books, food and more.">
+  <div class="flex items-baseline justify-between mb-10">
+    <h1 class="text-2xl font-semibold">Blog</h1>
+    <span class="text-sm text-ink-tertiary font-mono">{posts.length} post{posts.length !== 1 ? 's' : ''}</span>
+  </div>
+
+  {posts.length === 0 ? (
+    <p class="text-ink-secondary">No posts yet.</p>
+  ) : (
+    <ul class="space-y-8">
+      {posts.map(post => (
+        <li class="group border-b border-border pb-8 last:border-0 last:pb-0">
+          <a href={`/blog/${post.id}`} class="no-underline flex flex-col gap-1.5">
+            <div class="flex items-baseline justify-between gap-4">
+              <span class="font-medium group-hover:text-ink-secondary transition-colors">{post.data.title}</span>
+              <span class="text-xs text-ink-tertiary font-mono shrink-0">{formattedDate(post.data.date)}</span>
+            </div>
+            <span class="text-sm text-ink-secondary leading-relaxed">{post.data.description}</span>
+            {post.data.tags.length > 0 && (
+              <div class="flex gap-1.5 flex-wrap mt-1">
+                {post.data.tags.map(tag => (
+                  <span class="bg-surface text-ink-secondary px-1.5 py-0.5 rounded text-xs">{tag}</span>
+                ))}
+              </div>
+            )}
+          </a>
+        </li>
+      ))}
+    </ul>
+  )}
+</Base>

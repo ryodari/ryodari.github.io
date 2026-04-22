@@ -1,0 +1,51 @@
+---
+import Base from './Base.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, description, date, tags } = post.data;
+
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}).format(date);
+---
+
+<Base title={title} description={description}>
+  <article>
+    <header class="mb-10">
+      <div class="flex items-center gap-2 text-sm text-ink-tertiary mb-3 font-mono">
+        <time datetime={date.toISOString()}>{formattedDate}</time>
+        {tags.length > 0 && (
+          <>
+            <span>·</span>
+            <div class="flex gap-1.5 flex-wrap">
+              {tags.map(tag => (
+                <span class="bg-surface text-ink-secondary px-1.5 py-0.5 rounded text-xs">{tag}</span>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+      <h1 class="text-2xl font-semibold leading-snug">{title}</h1>
+      {description && (
+        <p class="mt-3 text-ink-secondary leading-relaxed">{description}</p>
+      )}
+    </header>
+
+    <div class="prose prose-neutral max-w-none">
+      <slot />
+    </div>
+
+    <footer class="mt-12 pt-6 border-t border-border">
+      <a href="/blog" class="text-sm text-ink-secondary hover:text-ink transition-colors no-underline">
+        ← Blog
+      </a>
+    </footer>
+  </article>
+</Base>

@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import { contactLinks } from '../../data/contact';
+---
+
+<Base title="Contact" description="Ways to reach me.">
+  <h1 class="text-2xl font-semibold mb-2">Contact</h1>
+  <p class="text-ink-secondary mb-10">Ways to reach me.</p>
+
+  <ul class="space-y-5">
+    {contactLinks.map(link => (
+      <li class="flex items-baseline gap-3">
+        <span class="text-sm font-medium w-24 shrink-0">{link.label}</span>
+        <a
+          href={link.href}
+          target={link.external ? '_blank' : undefined}
+          rel={link.external ? 'noopener noreferrer' : undefined}
+          class="text-sm text-ink-secondary hover:text-ink transition-colors"
+        >
+          {link.description ?? link.href}
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <p class="mt-10 text-sm text-ink-tertiary border-t border-border pt-6">
+    <b>For sensitive communication</b>, please use Signal, Matrix or my PGP key.
+  </p>
+</Base>

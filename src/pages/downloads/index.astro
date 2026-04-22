@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+import { downloads } from '../../data/downloads';
+---
+
+<Base title="Downloads" description="Files available for download.">
+  <h1 class="text-2xl font-semibold mb-2">Downloads</h1>
+  <p class="text-ink-secondary mb-10">Files available for download.</p>
+
+  {downloads.length === 0 ? (
+    <p class="text-ink-secondary">No files available.</p>
+  ) : (
+    <ul class="space-y-4">
+      {downloads.map(file => (
+        <li class="flex items-center justify-between gap-4 border-b border-border pb-4 last:border-0 last:pb-0">
+          <div class="flex flex-col gap-0.5">
+            <span class="font-medium text-sm">{file.name}</span>
+            {file.description && (
+              <span class="text-xs text-ink-secondary">{file.description}</span>
+            )}
+            {file.size && file.size !== '—' && (
+              <span class="text-xs text-ink-tertiary font-mono">{file.size}</span>
+            )}
+          </div>
+          <a
+            href={`/downloads/${file.filename}`}
+            download
+            class="text-sm text-ink-secondary hover:text-ink transition-colors no-underline shrink-0 border border-border hover:border-border-strong rounded px-3 py-1"
+          >
+            Download
+          </a>
+        </li>
+      ))}
+    </ul>
+  )}
+</Base>

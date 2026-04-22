@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const formattedDate = (date: Date) =>
+  new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' }).format(date);
+---
+
+<Base>
+  <section class="mb-16">
+    <p class="text-ink-secondary text-sm font-mono mb-1">Hi, I'm</p>
+    <h1 class="text-3xl font-semibold tracking-tight mb-4">Ryodari</h1>
+    <p class="text-ink-tertiary text-sm font-mono mb-6">Berlin, Germany</p>
+    <p class="text-ink-secondary leading-relaxed max-w-prose">
+      Baby Software Engineer · Project Manager · Writes about tech, books & good food.
+    </p>
+
+    <div class="flex gap-4 mt-6 text-sm">
+      <a href="/projects" class="text-ink-secondary hover:text-ink transition-colors no-underline">Projects →</a>
+      <a href="/contact" class="text-ink-secondary hover:text-ink transition-colors no-underline">Contact →</a>
+    </div>
+  </section>
+
+  {posts.length > 0 && (
+    <section>
+      <div class="flex items-baseline justify-between mb-6">
+        <h2 class="text-sm font-medium text-ink-tertiary uppercase tracking-widest">Latest posts</h2>
+        <a href="/blog" class="text-sm text-ink-secondary hover:text-ink transition-colors no-underline">All posts →</a>
+      </div>
+
+      <ul class="space-y-6">
+        {posts.map(post => (
+          <li class="group">
+            <a href={`/blog/${post.id}`} class="no-underline flex flex-col gap-1">
+              <span class="font-medium group-hover:text-ink-secondary transition-colors">{post.data.title}</span>
+              <span class="text-sm text-ink-secondary">{post.data.description}</span>
+              <span class="text-xs text-ink-tertiary font-mono mt-0.5">{formattedDate(post.data.date)}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+</Base>

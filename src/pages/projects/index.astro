@@ -1,0 +1,54 @@
+---
+import Base from '../../layouts/Base.astro';
+import { projects } from '../../data/projects';
+
+const statusLabel: Record<typeof projects[number]['status'], string> = {
+  active: 'Active',
+  archived: 'Archived',
+  wip: 'In progress',
+};
+---
+
+<Base title="Projects" description="A selection of things I've built.">
+  <h1 class="text-2xl font-semibold mb-2">Projects</h1>
+  <p class="text-ink-secondary mb-10">A selection of things I've built.</p>
+
+  {projects.length === 0 ? (
+    <p class="text-ink-secondary">No projects yet.</p>
+  ) : (
+    <ul class="space-y-8">
+      {projects.map(project => (
+        <li class="border-b border-border pb-8 last:border-0 last:pb-0">
+          <div class="flex items-start justify-between gap-4 mb-2">
+            <h2 class="font-medium">{project.name}</h2>
+            <span class="text-xs font-mono bg-surface text-ink-secondary px-1.5 py-0.5 rounded shrink-0">
+              {statusLabel[project.status]}
+            </span>
+          </div>
+          <p class="text-sm text-ink-secondary leading-relaxed mb-3">{project.description}</p>
+          <div class="flex gap-4 flex-wrap">
+            {project.url && (
+              <a href={project.url} target="_blank" rel="noopener noreferrer"
+                class="text-sm text-ink-secondary hover:text-ink transition-colors no-underline">
+                View project →
+              </a>
+            )}
+            {project.sourceUrl && (
+              <a href={project.sourceUrl} target="_blank" rel="noopener noreferrer"
+                class="text-sm text-ink-secondary hover:text-ink transition-colors no-underline">
+                Source →
+              </a>
+            )}
+          </div>
+          {project.tags.length > 0 && (
+            <div class="flex gap-1.5 flex-wrap mt-3">
+              {project.tags.map(tag => (
+                <span class="bg-surface text-ink-tertiary px-1.5 py-0.5 rounded text-xs">{tag}</span>
+              ))}
+            </div>
+          )}
+        </li>
+      ))}
+    </ul>
+  )}
+</Base>
