@@ -14,7 +14,20 @@ import { projects } from '../../data/projects';
       {projects.map(project => (
         <li class="border-b border-border pb-8 last:border-0 last:pb-0">
           <div class="flex items-start justify-between gap-4 mb-2">
-            <h2 class:list={['font-medium', project.archived && 'text-ink-secondary']}>{project.name}</h2>
+            <h2 class="font-medium">
+              {project.url || project.sourceUrl ? (
+                <a
+                  href={project.url ?? project.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class:list={['no-underline hover:text-ink-secondary transition-colors', project.archived && 'text-ink-secondary']}
+                >
+                  {project.name}
+                </a>
+              ) : (
+                <span class:list={[project.archived && 'text-ink-secondary']}>{project.name}</span>
+              )}
+            </h2>
             {project.archived && (
               <span class="text-xs font-mono bg-surface text-ink-tertiary px-1.5 py-0.5 rounded shrink-0">
                 Archived
