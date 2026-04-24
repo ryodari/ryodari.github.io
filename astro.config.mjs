@@ -5,6 +5,8 @@ import mdx from '@astrojs/mdx';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 
+import sitemap from '@astrojs/sitemap';
+
 export default defineConfig({
   site: 'https://beparano.id',
   output: 'static',
@@ -21,5 +23,5 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  integrations: [mdx()],
+  integrations: [mdx(), sitemap()],
 });
