@@ -4,14 +4,16 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, image } = Astro.props;
 
 const siteName = 'beparano.id';
 const siteDescription = 'Personal website of Ryodari — Berlin.';
 const pageTitle = title ? `${title} — ${siteName}` : siteName;
 const pageDescription = description ?? siteDescription;
+const ogImage = new URL(image ?? '/images/avatar.JPEG', Astro.site).toString();
 
 const navItems = [
   { label: 'Blog',      href: '/blog' },
@@ -41,6 +43,20 @@ const currentPath = Astro.url.pathname;
     <link rel="manifest" href="/site.webmanifest" />
 
     <link rel="alternate" type="application/rss+xml" title="beparano.id" href="/rss.xml" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={`https://beparano.id${currentPath}`} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter/X -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={ogImage} />
   </head>
 
   <body class="bg-paper text-ink flex flex-col min-h-screen">
@@ -82,7 +98,7 @@ const currentPath = Astro.url.pathname;
         <span>© {new Date().getFullYear()} Ryodari</span>
         <div class="flex gap-4">
           <a
-            href="https://github.com/ryodari/beparano.id"
+            href="https://github.com/ryodari/ryodari.github.io"
             target="_blank"
             rel="noopener noreferrer"
             class="hover:text-ink transition-colors no-underline"

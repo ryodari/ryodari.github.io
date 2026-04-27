@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { title, description, date, tags } = post.data;
+const { title, description, date, tags, image } = post.data;
 
 const formattedDate = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
@@ -16,7 +16,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 }).format(date);
 ---
 
-<Base title={title} description={description}>
+<Base title={title} description={description} image={image}>
   <article>
     <header class="mb-10">
       <div class="flex items-center gap-2 text-sm text-ink-tertiary mb-3 font-mono">
