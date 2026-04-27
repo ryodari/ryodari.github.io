@@ -19,7 +19,9 @@
     "@tailwindcss/vite": "^4.2.4",
     "astro": "^6.1.8",
     "rehype-autolink-headings": "^7.1.0",
+    "rehype-katex": "^7.0.1",
     "rehype-slug": "^6.0.0",
+    "remark-math": "^6.0.0",
     "tailwindcss": "^4.2.4"
   }
 }
