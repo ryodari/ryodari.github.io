@@ -58,6 +58,8 @@
 /* ── Prose (Blog content) ─────────────────────────────────── */
 @layer components {
   .prose {
+    hyphens: auto;
+    overflow-wrap: break-word;
     --tw-prose-body:          var(--color-ink);
     --tw-prose-headings:      var(--color-ink);
     --tw-prose-lead:          var(--color-ink-secondary);
