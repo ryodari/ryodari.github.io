@@ -21,6 +21,7 @@ title: "My post"
 description: "A short description."
 date: 2026-04-22
 tags: [some, tags]
+image: "/images/some-folder/some-file.jpeg"
 ---
 
 Content goes here.
