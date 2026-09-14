@@ -5,9 +5,10 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  katex?: boolean;
 }
 
-const { title, description, image } = Astro.props;
+const { title, description, image, katex = false } = Astro.props;
 
 const siteName = 'beparano.id';
 const siteDescription = 'Personal website of Ryodari — Berlin.';
@@ -43,7 +44,9 @@ const currentPath = Astro.url.pathname;
     <link rel="manifest" href="/site.webmanifest" />
 
     <link rel="alternate" type="application/rss+xml" title="beparano.id" href="/rss.xml" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+    {katex && (
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+    )}
 
     <!-- Open Graph -->
     <meta property="og:title" content={pageTitle} />
@@ -77,6 +80,7 @@ const currentPath = Astro.url.pathname;
             return (
               <a
                 href={href}
+                aria-current={isActive ? 'page' : undefined}
                 class:list={[
                   'no-underline transition-colors',
                   isActive ? 'text-ink font-medium' : 'text-ink-secondary hover:text-ink',

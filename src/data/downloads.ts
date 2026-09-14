@@ -6,12 +6,6 @@ export interface Download {
 }
 
 export const downloads: Download[] = [
-  //{
-  //  name: 'Curriculum Vitae',
-  //  filename: 'cv.pdf',
-  //  description: 'My curriculum vitae.',
-  //  size: '—',
-  //},
   {
     name: 'PGP Public Key',
     filename: 'pgp-public.asc',
